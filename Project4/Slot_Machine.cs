@@ -91,18 +91,18 @@ namespace Project4
             bool win = false;
             if (selectMode == 1)
             {
-                if (IsRow(1))
+                if (IsRowWinn(1))
                 {
                     money += wager * WINNING_MULTIPLIER;
                     Console.WriteLine("Congratulations! You won on the middle horizontal row!");
                     win = true;
                 }
             }
-            if (selectMode == 2)
+            if (selectMode == 2) 
             {
                 for (int row = 0; row < GRID_SIZE; row++)
                 {
-                    if (IsRow(row))
+                    if (IsRowWinn(row))
                     {
                         money += wager * WINNING_MULTIPLIER;
                         Console.WriteLine($"Congratulations! You won on row {row + 1}!");
@@ -150,7 +150,7 @@ namespace Project4
             }
 
         }
-        private bool IsRow(int rows)
+        private bool IsRowWinn(int rows)
         {
             for (int col = 1; col < GRID_SIZE; col++)
             {
@@ -174,7 +174,7 @@ namespace Project4
         }
     }
 
-}
+    }
 
 
 
