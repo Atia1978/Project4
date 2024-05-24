@@ -98,7 +98,7 @@ namespace Project4
                     win = true;
                 }
             }
-            if (selectMode == 2) 
+            if (selectMode == 2)
             {
                 for (int row = 0; row < GRID_SIZE; row++)
                 {
@@ -174,7 +174,7 @@ namespace Project4
         }
     }
 
-
+}
 
 
 
