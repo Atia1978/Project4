@@ -1,10 +1,10 @@
 ﻿namespace Project4
 {
-    internal class Program
+    internal class LotoGame
     {
         static void Main(string[] args)
         {
-            Slot_Machine games = new Slot_Machine();
+            Lucky_Day games = new Lucky_Day();
             games.Start();
         }
 
