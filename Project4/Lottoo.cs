@@ -9,7 +9,7 @@ using System.Threading.Tasks.Dataflow;
 
 namespace Project4
 {
-    internal class Lucky_Day
+    internal class Lottoo
     {
         private const int WINNING_MULTIPLIER = 2;
         private const int GRID_SIZE = 3;
@@ -20,8 +20,6 @@ namespace Project4
         private int[,] grid = new int[GRID_SIZE, GRID_SIZE];
         private Random random = new Random();
         private int money = TOTAL_MONEY;
-
-
         public void Start()
         {
             Console.WriteLine("Welcome to the Slot Machine Game !");
