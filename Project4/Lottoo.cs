@@ -1,4 +1,5 @@
 ﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,21 @@ namespace Project4
         private const int MAX_SIZE = 3;
         private const int JACKPOT_MULTIPLIER = 20;
         private const int TOTAL_MONEY = 100;
+        private const int MIDDLE_ROW_INDEX = 1;
+
         private int[,] grid = new int[GRID_SIZE, GRID_SIZE];
         private Random random = new Random();
         private int money = TOTAL_MONEY;
+
+        private enum SelectMode
+        {
+
+            MiddleHorizontal = 1,
+            AllHorizontal = 2,
+            AllVerticals = 3,
+            Diagonals = 4,
+            Jackpot = 5
+        }
         public void Start()
         {
             Console.WriteLine("Welcome to the Slot Machine Game !");
@@ -29,7 +42,7 @@ namespace Project4
                 Console.WriteLine("Enter Your wager; $");
                 int wager = int.Parse(Console.ReadLine());
 
-                 if (wager == MIN_SIZE)
+                if (wager == MIN_SIZE)
                 {
                     Console.WriteLine($"!!SORRY YOU DON'T HAVE ANY MONEY !! ; {money}");
                     break;
@@ -41,9 +54,9 @@ namespace Project4
                     continue;
                 }
 
-               
+
                 money -= wager;
-                int selectMode = GetSelectMode();
+                SelectMode selectMode = GetSelectMode();
                 FillGrid();
                 OutPutGrid();
                 CheckWinning(wager, selectMode);
@@ -59,7 +72,7 @@ namespace Project4
 
                 if (playAgain != "yes")
                 {
-                    break; 
+                    break;
                 }
             }
             Console.WriteLine("Game ended. Thank you for playing!");
@@ -95,14 +108,14 @@ namespace Project4
 
         }
 
-        private void CheckWinning(int wager, int selectMode)
+        private void CheckWinning(int wager, SelectMode selectMode)
         {
             bool win = false;
             switch (selectMode)
             {
-                case 1:
+                case SelectMode.MiddleHorizontal:
 
-                    if (IsRowWinn(1))
+                    if (IsRowWinn(MIDDLE_ROW_INDEX))
                     {
                         money += wager * WINNING_MULTIPLIER;
                         Console.WriteLine("Congratulations! You won on the middle horizontal rows!");
@@ -110,7 +123,7 @@ namespace Project4
                     }
                     break;
 
-                case 2:
+                case SelectMode.AllHorizontal:
 
                     for (int rows = 0; rows < GRID_SIZE; rows++)
                     {
@@ -123,7 +136,7 @@ namespace Project4
                     }
                     break;
 
-                case 3:
+                case SelectMode.AllVerticals:
 
                     for (int colum = 0; colum < GRID_SIZE; colum++)
                     {
@@ -136,7 +149,7 @@ namespace Project4
                     }
                     break;
 
-                case 4:
+                case SelectMode.Diagonals:
                     if (IsDiagonalWinnig())
                     {
                         money += wager * WINNING_MULTIPLIER;
@@ -144,7 +157,7 @@ namespace Project4
                         win = true;
                     }
                     break;
-                case 5:
+                case SelectMode.Jackpot:
 
                     if (IsJackpot())
 
@@ -164,20 +177,21 @@ namespace Project4
             Console.WriteLine($"You have ${money} left.");
         }
 
-        private int GetSelectMode()
+        private SelectMode GetSelectMode()
         {
             while (true)
             {
-                int selectMode;
+                SelectMode selectMode;
                 Console.WriteLine("Select mode:");
                 Console.WriteLine("1. Middle Horizontal");
                 Console.WriteLine("2. All Horizontal");
                 Console.WriteLine("3. All Verticals");
                 Console.WriteLine("4. Diagonals");
                 Console.WriteLine("5. Jackpot");
-                if (int.TryParse(Console.ReadLine(), out selectMode) && selectMode >= 1 && selectMode <= 5)
+
+                if (int.TryParse(Console.ReadLine(), out int mode) && Enum.IsDefined(typeof(SelectMode), mode))
                 {
-                    return selectMode;
+                    return (SelectMode)mode;
                 }
                 Console.WriteLine("Invalid input. Please enter a number between 1 and 5.");
             }
