@@ -10,6 +10,8 @@ using System.Threading.Tasks.Dataflow;
 
 namespace Project4
 {
+   
+
     internal class Lottoo
     {
         private const int WINNING_MULTIPLIER = 2;
@@ -24,6 +26,11 @@ namespace Project4
         private Random random = new Random();
         private int money = TOTAL_MONEY;
 
+        static void Main(string[] args)
+        {
+            Lottoo games = new Lottoo();
+            games.Start();
+        }
         private enum SelectMode
         {
 
