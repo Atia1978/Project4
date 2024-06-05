@@ -28,7 +28,7 @@ namespace Project4
 
         static void Main(string[] args)
         {
-            Lottoo games = new Lottoo();
+            var games = new Lottoo();
             games.Start();
         }
         private enum SelectMode
