@@ -4,13 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
 namespace Project4
 {
-   
+
 
     internal class Lottoo
     {
@@ -21,6 +22,7 @@ namespace Project4
         private const int JACKPOT_MULTIPLIER = 20;
         private const int TOTAL_MONEY = 100;
         private const int MIDDLE_ROW_INDEX = 1;
+        private const string YES_TO_PLAY_AGAIN = "yes";
 
         private int[,] grid = new int[GRID_SIZE, GRID_SIZE];
         private Random random = new Random();
@@ -47,7 +49,14 @@ namespace Project4
             {
                 Console.WriteLine($" You have {money}.");
                 Console.WriteLine("Enter Your wager; $");
-                int wager = int.Parse(Console.ReadLine());
+
+                String wagerInput = Console.ReadLine();
+                int wager;
+                if (!int.TryParse(wagerInput, out wager))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    continue;
+                }
 
                 if (wager == MIN_SIZE)
                 {
@@ -77,7 +86,7 @@ namespace Project4
                 Console.WriteLine("Do you wont to play again ?  yes / no  ");
                 string playAgain = Console.ReadLine().ToLower();
 
-                if (playAgain != "yes")
+                if (playAgain != YES_TO_PLAY_AGAIN)
                 {
                     break;
                 }
@@ -228,17 +237,25 @@ namespace Project4
         }
         private bool IsDiagonalWinnig()
         {
+            bool firstDiagonalWinn = true;
+            bool secondDiagonalWinn = true;
+           
+            int firstGribDiagonal = grid[0, 0];
+            int secondGribDiagonal = grid[0, GRID_SIZE - 1];
 
-            if (grid[0, 0] == grid[1, 1] && grid[1, 1] == grid[2, 2])
+            for (int i = 0; i < GRID_SIZE; i++)
             {
-                return true;
-            }
+                if (grid[i, i] != firstGribDiagonal)
+                {
+                    firstDiagonalWinn = false;
+                }
+                if (grid[i, GRID_SIZE - 1 - i] != secondGribDiagonal)
+                {
+                    secondDiagonalWinn = false;
+                }
 
-            if (grid[0, 2] == grid[1, 1] && grid[1, 1] == grid[2, 0])
-            {
-                return true;
             }
-            return false;
+            return firstDiagonalWinn || secondDiagonalWinn;
         }
         private bool IsJackpot()
         {
