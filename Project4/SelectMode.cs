@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Project4
 {
-   
-        public enum SelectMode
-        {
 
-            MiddleHorizontal = 1,
-            AllHorizontal = 2,
-            AllVerticals = 3,
-            Diagonals = 4,
-            Jackpot = 5
-        }
+    public enum SelectMode
+    {
+
+        MiddleHorizontal = 1,
+        AllHorizontal = 2,
+        AllVerticals = 3,
+        Diagonals = 4,
+        Jackpot = 5
     }
+}
 
