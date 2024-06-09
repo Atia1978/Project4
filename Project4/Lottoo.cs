@@ -67,7 +67,7 @@ namespace Project4
 
                 Console.WriteLine("Do you wont to play again ?  yes / no  ");
                 string playAgain = Console.ReadLine().ToLower();
-
+                 
                 if (playAgain != YES_TO_PLAY_AGAIN)
                 {
                     break;
