@@ -86,8 +86,12 @@ namespace Project4
                 {
                     return wager;
                 }
-                Console.WriteLine("Invalid input. Please enter a valid number.");
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
             }
+              
 
         }
         private void FillGrid()
